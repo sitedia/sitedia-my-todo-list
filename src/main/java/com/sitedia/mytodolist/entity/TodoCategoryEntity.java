@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -20,6 +22,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(of = { "id" })
 @Entity
@@ -30,13 +33,10 @@ public class TodoCategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     private Long todoId;
 
+    @NonNull
     private Long categoryId;
-
-    public TodoCategoryEntity(Long todoId, Long categoryId) {
-        this.todoId = todoId;
-        this.categoryId = categoryId;
-    }
 
 }
