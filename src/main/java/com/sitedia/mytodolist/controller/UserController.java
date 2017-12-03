@@ -11,6 +11,7 @@ import com.sitedia.common.rest.controller.AbstractCrudController;
 import com.sitedia.common.rest.exception.BusinessException;
 import com.sitedia.common.rest.exception.TechnicalException;
 import com.sitedia.common.rest.service.AbstractCrudService;
+import com.sitedia.common.rest.utils.SecurityUtils;
 import com.sitedia.mytodolist.dto.UserCreationDTO;
 import com.sitedia.mytodolist.dto.UserDTO;
 import com.sitedia.mytodolist.dto.UserUpdateDTO;
@@ -35,36 +36,37 @@ public class UserController extends AbstractCrudController<UserCreationDTO, User
         return userService;
     }
 
-	@Override
-	public boolean hasCreateAccess(UserCreationDTO creationDTO, HttpServletRequest request)
-			throws BusinessException, TechnicalException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasCreateAccess(UserCreationDTO creationDTO, HttpServletRequest request) throws BusinessException, TechnicalException {
+        return isAdmin();
+    }
 
-	@Override
-	public boolean hasListAccess(HttpServletRequest request) throws BusinessException, TechnicalException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasListAccess(HttpServletRequest request) throws BusinessException, TechnicalException {
+        return isAdmin();
+    }
 
-	@Override
-	public boolean hasGetAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasGetAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
+        return isAdmin();
+    }
 
-	@Override
-	public boolean hasUpdateAccess(Long id, UserUpdateDTO updateDTO, HttpServletRequest request)
-			throws BusinessException, TechnicalException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasUpdateAccess(Long id, UserUpdateDTO updateDTO, HttpServletRequest request) throws BusinessException, TechnicalException {
+        return isAdmin();
+    }
 
-	@Override
-	public boolean hasDeleteAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasDeleteAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
+        return isAdmin();
+    }
+
+    /**
+     * Checks if the connected is admin
+     * @return
+     */
+    private boolean isAdmin() {
+        return SecurityUtils.isAdmin();
+    }
 
 }
