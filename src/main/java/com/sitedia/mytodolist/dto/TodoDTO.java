@@ -27,6 +27,9 @@ public class TodoDTO {
     @ApiModelProperty(notes = "Identifier")
     private Long id;
 
+    @ApiModelProperty(notes = "User identifier")
+    private Long userId;
+
     @JsonDeserialize(using = SecureTextDeserializer.class)
     @ApiModelProperty(notes = "Title")
     private String title;
