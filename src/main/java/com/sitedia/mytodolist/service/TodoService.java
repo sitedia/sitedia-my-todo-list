@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.sitedia.common.rest.exception.BusinessException;
 import com.sitedia.common.rest.mapper.AbstractCrudMapper;
 import com.sitedia.common.rest.service.AbstractCrudService;
-import com.sitedia.mytodolist.dto.CategoryCreationDTO;
 import com.sitedia.mytodolist.dto.TodoCreationDTO;
 import com.sitedia.mytodolist.dto.TodoDTO;
 import com.sitedia.mytodolist.dto.TodoUpdateDTO;
