@@ -30,50 +30,48 @@ import com.sitedia.mytodolist.service.UserService;
 @RequestMapping(path = { "/api/v1.0/todos" }, produces = "application/json;charset=UTF-8")
 public class TodoController extends AbstractCrudController<TodoCreationDTO, TodoDTO, TodoUpdateDTO, TodoEntity, Long> {
 
-	@Lazy
-	@Autowired
-	private TodoService todoService;
+    @Lazy
+    @Autowired
+    private TodoService todoService;
 
     @Lazy
     @Autowired
     private UserService userService;
-	
-	@Override
-	protected AbstractCrudService<TodoCreationDTO, TodoDTO, TodoUpdateDTO, TodoEntity, Long> getService() {
-		return todoService;
-	}
 
-	@Override
-	public boolean hasListAccess(HttpServletRequest request) throws BusinessException, TechnicalException {
+    @Override
+    protected AbstractCrudService<TodoCreationDTO, TodoDTO, TodoUpdateDTO, TodoEntity, Long> getService() {
+        return todoService;
+    }
+
+    @Override
+    public boolean hasListAccess(HttpServletRequest request) throws BusinessException, TechnicalException {
         Long userId = request.getParameter("userId") != null ? Long.parseLong(request.getParameter("userId")) : null;
         return userId != null ? isOwner(userId) : false;
-	}
+    }
 
-	@Override
-	public boolean hasCreateAccess(TodoCreationDTO creationDTO, HttpServletRequest request)
-			throws BusinessException, TechnicalException {
+    @Override
+    public boolean hasCreateAccess(TodoCreationDTO creationDTO, HttpServletRequest request) throws BusinessException, TechnicalException {
         return isOwner(creationDTO.getUserId());
-	}
+    }
 
-	@Override
-	public boolean hasGetAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
-        TodoDTO todo  = todoService.get(id);
+    @Override
+    public boolean hasGetAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
+        TodoDTO todo = todoService.get(id);
         return todo != null ? isOwner(todo.getUserId()) : false;
-	}
+    }
 
-	@Override
-	public boolean hasUpdateAccess(Long id, TodoUpdateDTO updateDTO, HttpServletRequest request)
-			throws BusinessException, TechnicalException {
-        TodoDTO todo  = todoService.get(id);
+    @Override
+    public boolean hasUpdateAccess(Long id, TodoUpdateDTO updateDTO, HttpServletRequest request) throws BusinessException, TechnicalException {
+        TodoDTO todo = todoService.get(id);
         return todo != null ? isOwner(todo.getUserId()) : false;
-	}
+    }
 
-	@Override
-	public boolean hasDeleteAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
-        TodoDTO todo  = todoService.get(id);
+    @Override
+    public boolean hasDeleteAccess(Long id, HttpServletRequest request) throws BusinessException, TechnicalException {
+        TodoDTO todo = todoService.get(id);
         return todo != null ? isOwner(todo.getUserId()) : false;
-	}
-	
+    }
+
     /**
      * Checks if the to-do's user is the connected user
      * @param userId
@@ -85,6 +83,5 @@ public class TodoController extends AbstractCrudController<TodoCreationDTO, Todo
         UserDTO user = userService.getByMail(SecurityUtils.getUsername());
         return user != null && user.getId().equals(userId);
     }
-
 
 }
