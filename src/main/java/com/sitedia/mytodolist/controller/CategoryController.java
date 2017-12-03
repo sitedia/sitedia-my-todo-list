@@ -37,9 +37,16 @@ public class CategoryController extends AbstractCrudController<CategoryCreationD
     @Autowired
     private UserService userService;
 
-    @Override
-    protected AbstractCrudService<CategoryCreationDTO, CategoryDTO, CategoryUpdateDTO, CategoryEntity, Long> getService() {
-        return categoryService;
+    /**
+     * Checks if the connected user is the owner of the to-do
+     * @param ownerId
+     * @return
+     * @throws BusinessException
+     * @throws TechnicalException
+     */
+    public boolean isOwner(Long ownerId) throws BusinessException, TechnicalException {
+        UserDTO connectedUser = userService.getByMail(SecurityUtils.getUsername());
+        return connectedUser != null && ownerId.equals(connectedUser.getId());
     }
 
     @Override
@@ -72,16 +79,9 @@ public class CategoryController extends AbstractCrudController<CategoryCreationD
 
     }
 
-    /**
-     * Checks if the category's user is the connected user
-     * @param userId
-     * @return
-     * @throws BusinessException
-     * @throws TechnicalException
-     */
-    public boolean isOwner(Long userId) throws BusinessException, TechnicalException {
-        UserDTO user = userService.getByMail(SecurityUtils.getUsername());
-        return user != null && user.getId().equals(userId);
+    @Override
+    protected AbstractCrudService<CategoryCreationDTO, CategoryDTO, CategoryUpdateDTO, CategoryEntity, Long> getService() {
+        return categoryService;
     }
 
 }

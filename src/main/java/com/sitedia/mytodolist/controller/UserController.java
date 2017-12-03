@@ -31,9 +31,12 @@ public class UserController extends AbstractCrudController<UserCreationDTO, User
     @Autowired
     private UserService userService;
 
-    @Override
-    protected AbstractCrudService<UserCreationDTO, UserDTO, UserUpdateDTO, UserEntity, Long> getService() {
-        return userService;
+    /**
+     * Checks if the connected user is admin
+     * @return
+     */
+    private boolean isAdmin() {
+        return SecurityUtils.isAdmin();
     }
 
     @Override
@@ -61,12 +64,9 @@ public class UserController extends AbstractCrudController<UserCreationDTO, User
         return isAdmin();
     }
 
-    /**
-     * Checks if the connected is admin
-     * @return
-     */
-    private boolean isAdmin() {
-        return SecurityUtils.isAdmin();
+    @Override
+    protected AbstractCrudService<UserCreationDTO, UserDTO, UserUpdateDTO, UserEntity, Long> getService() {
+        return userService;
     }
 
 }
