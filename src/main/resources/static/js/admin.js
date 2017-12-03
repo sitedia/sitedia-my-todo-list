@@ -120,7 +120,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     
     todoEntity.showView()
-    .title('Détail de la tâches :')
+    .title('Détail de la tâche :')
     .fields([
     	nga.field('id').label("Identifiant"),
         nga.field('title').label("Titre"),
