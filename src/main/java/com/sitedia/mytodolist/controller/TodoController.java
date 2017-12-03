@@ -38,9 +38,16 @@ public class TodoController extends AbstractCrudController<TodoCreationDTO, Todo
     @Autowired
     private UserService userService;
 
-    @Override
-    protected AbstractCrudService<TodoCreationDTO, TodoDTO, TodoUpdateDTO, TodoEntity, Long> getService() {
-        return todoService;
+    /**
+     * Checks if the connected user is the owner of the to-do
+     * @param ownerId
+     * @return
+     * @throws BusinessException
+     * @throws TechnicalException
+     */
+    public boolean isOwner(Long ownerId) throws BusinessException, TechnicalException {
+        UserDTO connectedUser = userService.getByMail(SecurityUtils.getUsername());
+        return connectedUser != null && ownerId.equals(connectedUser.getId());
     }
 
     @Override
@@ -72,16 +79,9 @@ public class TodoController extends AbstractCrudController<TodoCreationDTO, Todo
         return todo != null ? isOwner(todo.getUserId()) : false;
     }
 
-    /**
-     * Checks if the to-do's user is the connected user
-     * @param userId
-     * @return
-     * @throws BusinessException
-     * @throws TechnicalException
-     */
-    public boolean isOwner(Long userId) throws BusinessException, TechnicalException {
-        UserDTO user = userService.getByMail(SecurityUtils.getUsername());
-        return user != null && user.getId().equals(userId);
+    @Override
+    protected AbstractCrudService<TodoCreationDTO, TodoDTO, TodoUpdateDTO, TodoEntity, Long> getService() {
+        return todoService;
     }
 
 }
