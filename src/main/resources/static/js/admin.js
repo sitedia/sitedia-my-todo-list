@@ -5,6 +5,63 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     // create an admin application
     var admin = nga.application('My Todo list').baseApiUrl('/api/v1.0/');
 
+    // Users
+    var userEntity = nga.entity('users');
+    userEntity.listView()
+    .title('Utilisateurs :')
+    .sortField('lastName')
+    .sortDir('ASC')
+    .perPage(15)
+    .filters([nga.field('lastName').label('Nom'), nga.field('firstName').label('Prénom'), nga.field('role').label('Rôle')])
+    .fields([
+    	nga.field('lastName').label('Nom').validation({ required: true }).isDetailLink(true).detailLinkRoute('show'),
+    	nga.field('firstName').label("Prénom").validation({ required: true }),
+    	nga.field('dateOfBirth', 'date').label('Date de naissance'),
+    	nga.field('role', 'choice').label('Rôle').validation({ required: true }).choices([{ value: 'ROLE_USER', label: 'Utilisateur' }, { value: 'ROLE_ADMIN', label: 'Administrateur' }]),
+        nga.field('mail', 'email').label('Adresse mail').validation({ required: true }),
+    ]);
+    
+    userEntity.showView()
+    .title('Fiche utilisateur :')
+    .fields([
+    	nga.field('id'),
+    	nga.field('lastName').label('Nom').validation({ required: true }),
+    	nga.field('firstName').label("Prénom").validation({ required: true }),
+    	nga.field('dateOfBirth', 'date').label('Date de naissance'),
+    	nga.field('role', 'choice').label('Rôle').validation({ required: true }).choices([{ value: 'ROLE_USER', label: 'Utilisateur' }, { value: 'ROLE_ADMIN', label: 'Administrateur' }]),
+        nga.field('mail', 'email').label('Adresse mail').validation({ required: true }),
+    ]);
+
+    userEntity.creationView()
+    .title('Ajouter un utilisateur :')
+    .fields([
+    	nga.field('lastName').label('Nom').validation({ required: true }),
+    	nga.field('firstName').label("Prénom").validation({ required: true }),
+    	nga.field('dateOfBirth', 'date').label('Date de naissance'),
+    	nga.field('role', 'choice').label('Rôle').validation({ required: true }).choices([{ value: 'ROLE_USER', label: 'Utilisateur' }, { value: 'ROLE_ADMIN', label: 'Administrateur' }]),
+        nga.field('mail', 'email').label('Adresse mail').validation({ required: true }),
+        nga.field('password', 'password').label('Mot de passe').validation({ required: true }),
+    ])
+    .prepare((entry) => {
+        entry.values.userId = localStorage.getItem('userId');
+    });
+    
+    userEntity.editionView()
+    .title('Modifier la fiche utilisateur :')
+    .fields([
+    	nga.field('lastName').label('Nom').validation({ required: true }),
+    	nga.field('firstName').label("Prénom").validation({ required: true }),
+    	nga.field('dateOfBirth', 'date').label('Date de naissance'),
+    	nga.field('role', 'choice').label('Rôle').validation({ required: true }).choices([{ value: 'ROLE_USER', label: 'Utilisateur' }, { value: 'ROLE_ADMIN', label: 'Administrateur' }]),
+        nga.field('mail', 'email').label('Adresse mail').validation({ required: true }),
+        nga.field('password', 'password').label('Mot de passe'),
+    ]);
+    
+    userEntity.deletionView()
+    .title("Supprimer l'utilisateur '{{ entry.values.firstName }} {{ entry.values.lastName }}' :")
+
+    admin.addEntity(userEntity);
+
     // Categories
     var categoryEntity = nga.entity('categories');
     categoryEntity.listView()
@@ -12,7 +69,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     .sortField('name')
     .sortDir('ASC')
     .perPage(15)
-    .permanentFilters({ })
+    .permanentFilters({ "userId" : localStorage.getItem('userId') })
     .filters([nga.field('name').label('Nom')])
     .fields([
         nga.field('name').isDetailLink(true).detailLinkRoute('show'),
@@ -52,7 +109,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     .sortField('title')
     .sortDir('ASC')
     .perPage(15)
-    .permanentFilters({ })
+    .permanentFilters({ "userId" : localStorage.getItem('userId') })
     .filters([
     	nga.field('title').label('Titre'),
         nga.field('categoryId', 'reference').label("Catégories").targetEntity(admin.getEntity('categories')).targetField(nga.field('name')).permanentFilters({ 'userId' : localStorage.getItem('userId') }).sortField('name'),
