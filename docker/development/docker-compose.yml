@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  db:
+    image: postgres:9.6.1
+    volumes:
+      - ./data:/var/lib/postgresql
+      - ../../sql:/docker-entrypoint-initdb.d
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "5480:5432"
+    environment:
+      - POSTGRES_USER=mytodolist
+      - POSTGRES_PASSWORD=private
