@@ -6,7 +6,6 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.sitedia.mytodolist.utils.RoleType;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

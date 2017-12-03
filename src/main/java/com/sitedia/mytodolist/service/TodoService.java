@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sitedia.common.rest.exception.BusinessException;
 import com.sitedia.common.rest.mapper.AbstractCrudMapper;
 import com.sitedia.common.rest.service.AbstractCrudService;
+import com.sitedia.mytodolist.dto.CategoryCreationDTO;
 import com.sitedia.mytodolist.dto.TodoCreationDTO;
 import com.sitedia.mytodolist.dto.TodoDTO;
 import com.sitedia.mytodolist.dto.TodoUpdateDTO;
@@ -33,7 +34,7 @@ public class TodoService extends AbstractCrudService<TodoCreationDTO, TodoDTO, T
         // Set categories in join table
         if (creationDTO.getCategories() != null) {
             for (Long categoryId : creationDTO.getCategories()) {
-                daoManager.create(TodoCategoryEntity.class, new TodoCategoryEntity(created.getId(), categoryId), null, null);
+                daoManager.create(TodoCategoryEntity.class, new TodoCategoryEntity(created.getId(), categoryId), null);
             }
         }
     }
@@ -54,7 +55,7 @@ public class TodoService extends AbstractCrudService<TodoCreationDTO, TodoDTO, T
         // Set categories in join table
         if (updateDTO.getCategories() != null) {
             for (Long categoryId : updateDTO.getCategories()) {
-                daoManager.create(TodoCategoryEntity.class, new TodoCategoryEntity(id, categoryId), null, null);
+                daoManager.create(TodoCategoryEntity.class, new TodoCategoryEntity(id, categoryId), null);
             }
         }
     }
@@ -69,4 +70,9 @@ public class TodoService extends AbstractCrudService<TodoCreationDTO, TodoDTO, T
         return TodoEntity.class;
     }
 
+    @Override
+    protected Long getId(TodoCreationDTO creationDTO) {
+    	return null;
+    }
+    
 }

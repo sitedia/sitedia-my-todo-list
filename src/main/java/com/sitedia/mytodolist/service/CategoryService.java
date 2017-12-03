@@ -29,4 +29,9 @@ public class CategoryService extends AbstractCrudService<CategoryCreationDTO, Ca
         return CategoryEntity.class;
     }
 
+    @Override
+    protected Long getId(CategoryCreationDTO creationDTO) {
+    	return null;
+    }
+    
 }

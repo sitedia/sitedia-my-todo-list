@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.sitedia.mytodolist.utils.RoleType;
+import com.sitedia.mytodolist.dto.RoleType;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,6 +21,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * User entity
+ * @author sitedia
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

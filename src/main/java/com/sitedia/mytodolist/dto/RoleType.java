@@ -1,4 +1,4 @@
-package com.sitedia.mytodolist.utils;
+package com.sitedia.mytodolist.dto;
 
 /**
  * User roles. Important: Spring requires ROLE_ prefix by default

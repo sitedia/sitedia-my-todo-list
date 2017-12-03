@@ -7,6 +7,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.sitedia.common.rest.annotation.EnableCommonRest;
 
+/**
+ * Application launcher
+ * @author sitedia
+ *
+ */
 @SpringBootApplication
 @EnableAsync
 @EnableCommonRest

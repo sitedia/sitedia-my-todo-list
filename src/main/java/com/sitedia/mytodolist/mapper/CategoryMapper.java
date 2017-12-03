@@ -11,6 +11,11 @@ import com.sitedia.mytodolist.dto.CategoryDTO;
 import com.sitedia.mytodolist.dto.CategoryUpdateDTO;
 import com.sitedia.mytodolist.entity.CategoryEntity;
 
+/**
+ * Category mapper
+ * @author cedric
+ *
+ */
 @Component
 @Lazy
 public class CategoryMapper extends AbstractCrudMapper<CategoryCreationDTO, CategoryDTO, CategoryUpdateDTO, CategoryEntity, Long> {

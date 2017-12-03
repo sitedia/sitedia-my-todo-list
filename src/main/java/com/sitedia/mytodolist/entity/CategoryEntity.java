@@ -12,6 +12,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Category entity
+ * @author sitedia
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

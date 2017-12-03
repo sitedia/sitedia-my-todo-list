@@ -21,7 +21,7 @@ import com.sitedia.common.rest.utils.Sha512PasswordEncoder;
  *
  */
 @Configuration
-@EnableGlobalMethodSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 @EnableWebSecurity
 @EnableJdbcHttpSession
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {

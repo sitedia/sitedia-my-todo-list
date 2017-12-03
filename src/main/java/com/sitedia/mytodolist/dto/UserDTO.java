@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sitedia.common.rest.utils.SecureTextDeserializer;
-import com.sitedia.mytodolist.utils.RoleType;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

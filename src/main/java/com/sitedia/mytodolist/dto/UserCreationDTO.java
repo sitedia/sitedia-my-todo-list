@@ -7,8 +7,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
-import com.sitedia.mytodolist.utils.RoleType;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -21,6 +21,11 @@ import com.sitedia.mytodolist.dto.TodoUpdateDTO;
 import com.sitedia.mytodolist.entity.TodoCategoryEntity;
 import com.sitedia.mytodolist.entity.TodoEntity;
 
+/**
+ * To-do mapper
+ * @author cedric
+ *
+ */
 @Component
 @Lazy
 public class TodoMapper extends AbstractCrudMapper<TodoCreationDTO, TodoDTO, TodoUpdateDTO, TodoEntity, Long> {

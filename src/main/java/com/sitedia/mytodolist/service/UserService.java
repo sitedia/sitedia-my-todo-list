@@ -83,5 +83,11 @@ public class UserService extends AbstractCrudService<UserCreationDTO, UserDTO, U
             return null;
         }
     }
+    
+    @Override
+    protected Long getId(UserCreationDTO creationDTO) {
+    	return null;
+    }
+    
 
 }

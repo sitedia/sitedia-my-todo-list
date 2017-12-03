@@ -12,6 +12,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Join table between To-do and Category
+ * @author sitedia
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

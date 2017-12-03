@@ -13,6 +13,11 @@ import com.sitedia.mytodolist.dto.UserDTO;
 import com.sitedia.mytodolist.dto.UserUpdateDTO;
 import com.sitedia.mytodolist.entity.UserEntity;
 
+/**
+ * User mapper
+ * @author cedric
+ *
+ */
 @Lazy
 @Component
 public class UserMapper extends AbstractCrudMapper<UserCreationDTO, UserDTO, UserUpdateDTO, UserEntity, Long> {
