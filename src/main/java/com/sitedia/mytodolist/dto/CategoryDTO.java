@@ -21,6 +21,9 @@ public class CategoryDTO {
     @ApiModelProperty(notes = "Identifier")
     private Long id;
 
+    @ApiModelProperty(notes = "User identifier")
+    private Long userId;
+    
     @ApiModelProperty(notes = "Name")
     private String name;
 
